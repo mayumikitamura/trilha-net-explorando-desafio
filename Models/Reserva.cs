@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace DesafioProjetoHospedagem.Models
 {
     public class Reserva
@@ -15,16 +17,20 @@ namespace DesafioProjetoHospedagem.Models
 
         public void CadastrarHospedes(List<Pessoa> hospedes)
         {
-            // TODO: Verificar se a capacidade é maior ou igual ao número de hóspedes sendo recebido
-            // *IMPLEMENTE AQUI*
-            if (true)
+            
+            bool SuiteComporta = hospedes.Count <= Suite.Capacidade;
+
+
+
+
+            if (SuiteComporta)
             {
                 Hospedes = hospedes;
             }
             else
             {
-                // TODO: Retornar uma exception caso a capacidade seja menor que o número de hóspedes recebido
-                // *IMPLEMENTE AQUI*
+               
+                Console.WriteLine("A suíte não comporta a quantidade de hóspedes. Verifique outra acomodação.");
             }
         }
 
@@ -35,26 +41,36 @@ namespace DesafioProjetoHospedagem.Models
 
         public int ObterQuantidadeHospedes()
         {
-            // TODO: Retorna a quantidade de hóspedes (propriedade Hospedes)
-            // *IMPLEMENTE AQUI*
-            return 0;
+            
+        
+            {
+                Console.WriteLine($"QuantidadedeHospedes: {Hospedes.Count}");
+            }
+
+            return Hospedes.Count;
         }
 
         public decimal CalcularValorDiaria()
         {
-            // TODO: Retorna o valor da diária
-            // Cálculo: DiasReservados X Suite.ValorDiaria
-            // *IMPLEMENTE AQUI*
-            decimal valor = 0;
-
-            // Regra: Caso os dias reservados forem maior ou igual a 10, conceder um desconto de 10%
-            // *IMPLEMENTE AQUI*
-            if (true)
+            
+        
+            
+            decimal valorBruto = DiasReservados * Suite.ValorDiaria;
+            decimal valorFinal;
+          
+            if (DiasReservados >= 10)
             {
-                valor = 0;
+                decimal desconto = (valorBruto * 10) / 100;
+                valorFinal = valorBruto - desconto;
             }
 
-            return valor;
+            else
+            {
+                valorFinal = valorBruto;
+            }
+        
+            
+            return valorFinal;
         }
     }
 }
